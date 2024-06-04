@@ -13,7 +13,7 @@ const Board = () => {
   const boardArray = boardBuilder(piecePositions);
 
   return (
-    <div className="board bg-slate-800 flex items-center justify-center xl:justify-start py-2 xl:px-8 xl:h-screen">
+    <div className="board bg-slate-800 flex items-center justify-center md:justify-start md:py-3 md:px-5 md:h-screen h-[65vh]">
       <div onClick={() => setPiecePositions(initialPiecePositions)} className="md:rounded-lg rounded-md overflow-hidden grid grid-rows-8 grid-cols-8">
         {boardArray}
       </div>
@@ -28,7 +28,7 @@ const Square = (props: {pieceSVG: React.ReactElement, x: number, y: number, curs
   );
   return (
     <button
-      className={`w-[calc(100vw/8-2px)] aspect-square xl:w-[5.25rem] ${lightColor ? "bg-green-100" : "bg-green-200"} ${props.cursor} hover:brightness-90`}
+      className={`aspect-square w-12 md:w-[5.25rem] ${lightColor ? "bg-green-100" : "bg-green-200"} ${props.cursor} hover:brightness-90`}
     >
       <div className="flex justify-center items-center">{props.pieceSVG}</div>
     </button>
