@@ -14,7 +14,7 @@ const Board = () => {
 
   return (
     <div className="board bg-slate-800 flex items-center justify-center xl:justify-start py-2 xl:px-8 xl:h-screen">
-      <div className="md:rounded-lg rounded-md overflow-hidden grid grid-rows-8 grid-cols-8">
+      <div onClick={() => setPiecePositions(initialPiecePositions)} className="md:rounded-lg rounded-md overflow-hidden grid grid-rows-8 grid-cols-8">
         {boardArray}
       </div>
     </div>
