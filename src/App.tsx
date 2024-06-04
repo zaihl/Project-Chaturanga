@@ -1,4 +1,4 @@
-import ChessBoard from "./components/Board"
+import ChessBoard from "./components/Board";
 
 const App = () => {
   return (
@@ -7,7 +7,7 @@ const App = () => {
         <ChessBoard />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
