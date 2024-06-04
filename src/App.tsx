@@ -1,10 +1,10 @@
-import ChessBoard from "./components/Board";
+import Board from "./components/Board";
 
 const App = () => {
   return (
     <>
       <div className="chess-game">
-        <ChessBoard />
+        <Board/>
       </div>
     </>
   );
