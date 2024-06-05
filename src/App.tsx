@@ -4,7 +4,7 @@ const App = () => {
   return (
     <>
       <div className="chess-game">
-        <Board/>
+        <Board myColor="white"/>
       </div>
     </>
   );
