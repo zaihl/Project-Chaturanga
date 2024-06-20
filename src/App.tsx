@@ -1,10 +1,8 @@
-import Board from "./components/Board";
-
 const App = () => {
   return (
     <>
       <div className="chess-game">
-        <Board myColor="white"/>
+        Project Scraped
       </div>
     </>
   );
