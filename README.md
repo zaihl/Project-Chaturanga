@@ -2,7 +2,7 @@
 - [x] Create board
 - [x] Place chess pieces
 - [x] Assign allowed moves to pieces
-- [x] Scraped the entire code because it was getting too complex without state management 
+- [x] Scraped the entire code
 - [ ] Migrate to Zustand
 - [ ] Assign not-allowed moves
 - [ ] Add pawn moving and capturing logic
