@@ -1,3 +1,5 @@
+// this file contains the SVG for all the chess pieces
+
 export const BlackKing = () => {
   return (
     <svg

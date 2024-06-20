@@ -1,3 +1,5 @@
+// Definition of the initial positions of the chess pieces
+
 import {
   BlackKing,
   BlackQueen,
@@ -11,7 +13,7 @@ import {
   WhiteBishop,
   WhiteKnight,
   WhitePawn,
-} from "./Pieces";
+} from "../components/Pieces";
 
 interface ChessPiece {
   piece: string;
@@ -181,3 +183,12 @@ export const initialPiecePositions: ChessPiece[] = [
     position: { x: 7, y: 7 },
   },
 ];
+
+export function occupiedPosition() {
+  const occupiedPosition = []
+  for (const piece of initialPiecePositions) {
+    const { x, y } = piece.position;
+    occupiedPosition.push({ x, y })
+  }
+  return occupiedPosition;
+}
