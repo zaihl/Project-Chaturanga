@@ -2,6 +2,7 @@
 - [x] Create board
 - [x] Place chess pieces
 - [x] Assign allowed moves to pieces
+- [ ] Migrate to Zustand, refactor code
 - [ ] Assign not-allowed moves
 - [ ] Add pawn moving and capturing logic
 - [ ] Add rook moving and capturing logic
