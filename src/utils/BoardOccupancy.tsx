@@ -302,7 +302,7 @@ const initialPiecePositions: SquareOccupancy[] = [
     pieceType: "queen",
     pieceColor: "white",
     pieceSVG: WhiteQueen(),
-    x: 7,
+    x: 3,
     y: 3,
     state: "piece",
     selected: false,

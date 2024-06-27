@@ -3,6 +3,7 @@ import { handlePawn } from "./possibleMovesHelper/handlePawn";
 import { handleKnight } from "./possibleMovesHelper/handleKnight";
 import { handleBishop } from "./possibleMovesHelper/handleBishop";
 import { handleRook } from "./possibleMovesHelper/handleRook";
+import { handleQueen } from "./possibleMovesHelper/handleQueen";
 
 interface SquareOccupancy {
   pieceType: string;
@@ -57,7 +58,7 @@ function possibleMoves(newBoard: SquareOccupancy[][]): SquareOccupancy[][] {
   } else if (pieceType === "bishop") {
     validMoves = handleBishop(selectedPiece, possibleBoard);
   } else if (pieceType === "queen") {
-    validMoves = handlePawn(selectedPiece, possibleBoard);
+    validMoves = handleQueen(selectedPiece, possibleBoard);
   } else if (pieceType === "king") {
     validMoves = handlePawn(selectedPiece, possibleBoard);
   }
@@ -76,16 +77,3 @@ function possibleMoves(newBoard: SquareOccupancy[][]): SquareOccupancy[][] {
 
   return possibleBoard;
 }
-
-// function handleRook(
-//   selectedPiece: SquareOccupancy,
-//   possibleBoard: SquareOccupancy[][]
-// ): validMoveInterface[] {}
-// function handleQueen(
-//   selectedPiece: SquareOccupancy,
-//   possibleBoard: SquareOccupancy[][]
-// ): validMoveInterface[] {}
-// function handleKing(
-//   selectedPiece: SquareOccupancy,
-//   possibleBoard: SquareOccupancy[][]
-// ): validMoveInterface[] {}
