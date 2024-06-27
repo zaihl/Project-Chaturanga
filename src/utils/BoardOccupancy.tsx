@@ -30,9 +30,9 @@ const initialPiecePositions: SquareOccupancy[] = [
   {
     pieceType: "rook",
     pieceColor: "black",
-    pieceSVG: BlackRook(),
-    x: 0,
-    y: 0,
+    pieceSVG: BlackRook(), // testing position
+    x: 5,
+    y: 6,
     state: "piece",
     selected: false,
     kill: false
@@ -48,7 +48,7 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false
   },
   {
-    pieceType: "bishop",
+    pieceType: "bishop", // testing position
     pieceColor: "black",
     pieceSVG: BlackBishop(),
     x: 3,
