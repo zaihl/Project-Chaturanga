@@ -1,5 +1,7 @@
 import { useBoard } from "../Store/store";
 import Square from "./Square";
+import { playSound } from "../utils/playSound";
+import { useEffect } from "react";
 
 interface SquareOccupancy {
   pieceType: string;
@@ -15,6 +17,10 @@ interface SquareOccupancy {
 const Board = () => {
   const currentBoard = useBoard((state) => state.currentBoard);
   const renderedBoard = boardBuilder(currentBoard);
+  useEffect(() => {
+    playSound("move");
+    playSound("kill")
+  }, [])
   return (
     <div className="grid grid-cols-8 grid-rows-8 w-96 md:w-[42rem] rounded-lg overflow-hidden">
       {renderedBoard}

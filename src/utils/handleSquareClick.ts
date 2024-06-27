@@ -4,6 +4,8 @@ import { handleKnight } from "./possibleMovesHelper/handleKnight";
 import { handleBishop } from "./possibleMovesHelper/handleBishop";
 import { handleRook } from "./possibleMovesHelper/handleRook";
 import { handleQueen } from "./possibleMovesHelper/handleQueen";
+import { handleMoveLogic } from "./handleMoveLogic";
+import { playSound } from "./playSound";
 
 interface SquareOccupancy {
   pieceType: string;
@@ -27,15 +29,60 @@ export function handleClick(
   x: number,
   y: number
 ) {
+  const boardState = useBoard.getState();
+  const selectedPlayerColor = boardState.selectedPlayerColor;
+  const setSelectedPlayerColor = boardState.setSelectedPlayerColor;
+  const setWhiteMoves = boardState.setWhiteMoves;
+  const setBlackMoves = boardState.setBlackMoves;
+
   const board = useBoard.getState().currentBoard;
   const setBoard = useBoard.getState().setBoard;
   e.preventDefault();
+
   const newBoard = board.slice();
-  newBoard.forEach((row) => row.forEach((square) => {
-    square.selected = false;
-    square.kill = false;
-    square.state = square.pieceColor === undefined ? 'empty' : 'piece';
-  }));
+
+  if (newBoard[x][y].pieceColor !== selectedPlayerColor && newBoard[x][y].state !== "possibleMove") {
+    newBoard.forEach((row) =>
+      row.forEach((square) => {
+        square.selected = false;
+        square.kill = false;
+        square.state = square.pieceColor === undefined ? "empty" : "piece";
+      })
+    );
+    setBoard(newBoard);
+    return;
+  }
+
+  if (newBoard[x][y].state === "possibleMove") {
+    const currentColor = selectedPlayerColor;
+    if (currentColor === "white") {
+      setWhiteMoves({
+        piece: newBoard[x][y].pieceType,
+        from: { x: newBoard[x][y].x, y: newBoard[x][y].y },
+        to: { x, y },
+      })
+    } else {
+      setBlackMoves({
+        piece: newBoard[x][y].pieceType,
+        from: { x: newBoard[x][y].x, y: newBoard[x][y].y },
+        to: { x, y },
+      })
+    }
+    const newColor = selectedPlayerColor === "black" ? "white" : "black";
+    newBoard[x][y].kill ? playSound("kill") : playSound("move");
+    const possibleBoard = handleMoveLogic(newBoard, x, y);
+    setSelectedPlayerColor(newColor);
+    setBoard(possibleBoard);
+    return;
+  }
+
+  newBoard.forEach((row) =>
+    row.forEach((square) => {
+      square.selected = false;
+      square.kill = false;
+      square.state = square.pieceColor === undefined ? "empty" : "piece";
+    })
+  );
   newBoard[x][y].selected = newBoard[x][y].state === "empty" ? false : true;
   const possibleBoard = possibleMoves(newBoard);
   setBoard(possibleBoard);

@@ -23,16 +23,16 @@ export function handlePawn(
     possibleBoard: SquareOccupancy[][]
 ): validMoveInterface[] {
     const boardSate = useBoard.getState()
-    const myMoves = selectedPiece.pieceColor === 'black' ? boardSate.blackMoves : boardSate.whiteMoves
-    const opponentMoves = selectedPiece.pieceColor === 'white' ? boardSate.blackMoves : boardSate.whiteMoves
+    const myMoves = boardSate.selectedPlayerColor === 'black' ? boardSate.blackMoves : boardSate.whiteMoves
+    const opponentMoves = boardSate.selectedPlayerColor === 'white' ? boardSate.blackMoves : boardSate.whiteMoves
 
-    const myFirstMove = myMoves.length === 1
+    const myFirstMove = myMoves.length === 0
 
     const validMoves: validMoveInterface[] = [];
     const currentX = selectedPiece.x;
     const currentY = selectedPiece.y;
 
-    if (selectedPiece.pieceColor === boardSate.currentPlayerColor) {
+    if (boardSate.currentPlayerColor === boardSate.selectedPlayerColor) {
         if (myFirstMove) return [{ x: currentX - 2, y: currentY, kill: false }];
         const possibleMoves = [
             { x: currentX - 1, y: currentY },

@@ -26,16 +26,22 @@ type boardStore = {
     check: boolean,
     currentBoard: SquareOccupancy[][],
     setBoard: (newBoard: SquareOccupancy[][]) => void,
-    setCheck: (check: boolean) => void
+    setCheck: (check: boolean) => void,
+    setSelectedPlayerColor: (color: "white" | "black") => void,
+    setWhiteMoves: (move: moveHistory) => void,
+    setBlackMoves: (move: moveHistory) => void
 }
 
 export const useBoard = create<boardStore>((set) => ({
     currentPlayerColor: "white",
     selectedPlayerColor: "white",
     whiteMoves: [],
-    blackMoves: [{ piece: 'pawn', from: { x: 2, y: 5 }, to: { x: 4, y: 5 } }],
+    blackMoves: [],
     check: false,
     currentBoard: boardArray,
     setBoard: (newBoard: SquareOccupancy[][]) =>  set({currentBoard: newBoard}),
-    setCheck: (check: boolean) => set({check})
+    setCheck: (check: boolean) => set({check}),
+    setSelectedPlayerColor: (color: "white" | "black") => set({selectedPlayerColor: color}),
+    setWhiteMoves: (move: moveHistory) => set((state) => ({whiteMoves: [...state.whiteMoves, move]})),
+    setBlackMoves: (move: moveHistory) => set((state) => ({blackMoves: [...state.blackMoves, move]}))
 }))

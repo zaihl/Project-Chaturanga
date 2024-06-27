@@ -30,29 +30,29 @@ const initialPiecePositions: SquareOccupancy[] = [
   {
     pieceType: "rook",
     pieceColor: "black",
-    pieceSVG: BlackRook(), // testing position
-    x: 5,
-    y: 6,
+    pieceSVG: BlackRook(),
+    x: 0,
+    y: 0,
     state: "piece",
     selected: false,
     kill: false
   },
   {
-    pieceType: "knight", // testing position
+    pieceType: "knight", 
     pieceColor: "black",
     pieceSVG: BlackKnight(),
-    x: 5,
-    y: 5,
+    x: 0,
+    y: 1,
     state: "piece",
     selected: false,
     kill: false
   },
   {
-    pieceType: "bishop", // testing position
+    pieceType: "bishop",
     pieceColor: "black",
     pieceSVG: BlackBishop(),
-    x: 3,
-    y: 4,
+    x: 0,
+    y: 2,
     state: "piece",
     selected: false,
     kill: false
@@ -108,10 +108,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false
   },
   {
-    pieceType: "pawn", // testing position
+    pieceType: "pawn", 
     pieceColor: "black",
     pieceSVG: BlackPawn(),
-    x: 5,
+    x: 1,
     y: 0,
     state: "piece",
     selected: false,
@@ -128,20 +128,20 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false
   },
   {
-    pieceType: "pawn", // testing position
+    pieceType: "pawn", 
     pieceColor: "black",
     pieceSVG: BlackPawn(),
-    x: 4,
+    x: 1,
     y: 2,
     state: "piece",
     selected: false,
     kill: false
   },
   {
-    pieceType: "pawn", // testing position
+    pieceType: "pawn", 
     pieceColor: "black",
     pieceSVG: BlackPawn(),
-    x: 5,
+    x: 1,
     y: 3,
     state: "piece",
     selected: false,
@@ -158,10 +158,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false
   },
   { 
-    pieceType: "pawn", // testing position
+    pieceType: "pawn", 
     pieceColor: "black",
     pieceSVG: BlackPawn(),
-    x: 4,
+    x: 1,
     y: 5,
     state: "piece",
     selected: false,
@@ -187,7 +187,6 @@ const initialPiecePositions: SquareOccupancy[] = [
     selected: false,
     kill: false
   },
-  // White pawns...
   {
     pieceType: "pawn",
     pieceColor: "white",
@@ -249,10 +248,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false
   },
   {
-    pieceType: "pawn", // testing position
+    pieceType: "pawn", 
     pieceColor: "white",
     pieceSVG: WhitePawn(),
-    x: 4,
+    x: 6,
     y: 6,
     state: "piece",
     selected: false,
@@ -302,8 +301,8 @@ const initialPiecePositions: SquareOccupancy[] = [
     pieceType: "queen",
     pieceColor: "white",
     pieceSVG: WhiteQueen(),
-    x: 3,
-    y: 1,
+    x: 7,
+    y: 3,
     state: "piece",
     selected: false,
     kill: false
