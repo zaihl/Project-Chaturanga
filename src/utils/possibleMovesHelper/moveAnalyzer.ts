@@ -28,8 +28,6 @@ export function moveImpact(
     y: number,
     selectedPieceColor: "white" | "black" | undefined
 ): "kill" | "empty" | "self" {
-    console.log(x, y)
-    console.log(possibleBoard[x][y])
     if (possibleBoard[x][y].pieceColor === undefined) {
         return "empty";
     } else {

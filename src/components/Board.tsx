@@ -15,7 +15,6 @@ interface SquareOccupancy {
 const Board = () => {
   const currentBoard = useBoard((state) => state.currentBoard);
   const renderedBoard = boardBuilder(currentBoard);
-  console.log("here at the start");
   return (
     <div className="grid grid-cols-8 grid-rows-8 w-96 md:w-[42rem] rounded-lg overflow-hidden">
       {renderedBoard}

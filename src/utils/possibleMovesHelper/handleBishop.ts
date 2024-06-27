@@ -55,6 +55,5 @@ export function handleBishop(
             distance++;
         }
     }
-    console.log('bishop valid moves are: ', validMoves)
     return validMoves;
 }
