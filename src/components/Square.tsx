@@ -28,12 +28,13 @@ const Square = ({
       ? "bg-green-300"
       : "bg-green-100";
   const dim = (state === 'possibleMove' && !kill) ? 'sepia' : ''
+  const cursor = (state === 'empty') ? "cursor-default" : "cursor-pointer"
   return (
     <div className={`${bgColor}`}>
       <button
         onClick={(e) => handleClick(e, x, y)}
         id={`${x},${y}`}
-        className={`${bgColor} ${dim} ${highlighted} aspect-square w-12 md:w-[5.25rem]`}
+        className={`${bgColor} ${dim} ${highlighted} aspect-square w-12 md:w-[5.25rem] ${cursor}`}
       >
         <div
           className="flex justify-center items-center"

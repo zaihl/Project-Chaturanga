@@ -51,8 +51,8 @@ const initialPiecePositions: SquareOccupancy[] = [
     pieceType: "bishop",
     pieceColor: "black",
     pieceSVG: BlackBishop(),
-    x: 0,
-    y: 2,
+    x: 3,
+    y: 4,
     state: "piece",
     selected: false,
     kill: false

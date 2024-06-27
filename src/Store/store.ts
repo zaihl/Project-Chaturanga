@@ -19,8 +19,8 @@ interface moveHistory {
 }
 
 type boardStore = {
-    currentPlayerColor: "white" | "black",
-    selectedPlayer: "white" | "black",
+    currentPlayerColor: "white" | "black", // set at the beginning of game
+    selectedPlayer: "white" | "black", // whose chance it is right now
     whiteMoves: moveHistory[],
     blackMoves: moveHistory[],
     check: boolean,
