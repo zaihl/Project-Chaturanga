@@ -8,11 +8,11 @@
 - [x] Place chess pieces
 - [x] Assign allowed moves to pieces
 - [x] Assign not-allowed moves 
-- [ ] Add pawn moving and capturing logic
-- [ ] Add rook moving and capturing logic
-- [ ] Add bishop moving and capturing logic
-- [ ] Add knight moving and capturing logic
-- [ ] Add queen moving and capturing logic
+- [x] Add pawn moving and capturing logic
+- [x] Add rook moving and capturing logic
+- [x] Add bishop moving and capturing logic
+- [x] Add knight moving and capturing logic
+- [x] Add queen moving and capturing logic
 - [ ] Add checks
 - [ ] Add king moving and capturing logic
 - [ ] Add checkmates
