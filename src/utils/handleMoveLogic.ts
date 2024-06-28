@@ -15,12 +15,22 @@ export function handleMoveLogic(
   x: number,
   y: number
 ) {
+  const selectedPiece = newBoard
+    .flat()
+    .find((square) => square.selected) as SquareOccupancy;
 
-  const selectedPiece = newBoard.flat().find((square) => square.selected) as SquareOccupancy;
-
-  const emptySquare = newBoard.flat().find((square) => square.state === "empty") as SquareOccupancy;
+  const emptySquare = newBoard
+    .flat()
+    .find((square) => square.state === "empty") as SquareOccupancy;
   const emptySVG = emptySquare.pieceSVG;
-  if (newBoard[x][y].pieceType === 'null') {
+  if (
+    newBoard[x][y].pieceType === "null" &&
+    selectedPiece.pieceType === "pawn" &&
+    (selectedPiece.x === x + 1 || selectedPiece.x === x - 1) &&
+    (selectedPiece.y === y + 1 || selectedPiece.y === y - 1) &&
+    (newBoard[x + 1][y].pieceType === "pawn" ||
+      newBoard[x - 1][y].pieceType === "pawn")
+  ) {
     handleEnPassant(newBoard, x, y, selectedPiece, emptySVG);
   }
   newBoard[x][y] = {
@@ -48,14 +58,19 @@ export function handleMoveLogic(
   return newBoard;
 }
 
-
-function handleEnPassant(newBoard: SquareOccupancy[][], x: number, y: number, selectedPiece: SquareOccupancy, emptySVG: React.ReactNode) {
+function handleEnPassant(
+  newBoard: SquareOccupancy[][],
+  x: number,
+  y: number,
+  selectedPiece: SquareOccupancy,
+  emptySVG: React.ReactNode
+) {
   const selectedColor = selectedPiece.pieceColor;
-  console.log('here in en passant handler')
-  console.log(x, y, selectedPiece)
-  if (selectedColor === 'white') {
-    newBoard[x+1][y] = {
-      id: `null-${selectedPiece.x+1}-${selectedPiece.y}`,
+  console.log("here in en passant handler");
+  console.log(x, y, selectedPiece);
+  if (selectedColor === "white") {
+    newBoard[x + 1][y] = {
+      id: `null-${selectedPiece.x + 1}-${selectedPiece.y}`,
       x: selectedPiece.x,
       y: selectedPiece.y,
       selected: false,
@@ -65,8 +80,8 @@ function handleEnPassant(newBoard: SquareOccupancy[][], x: number, y: number, se
       state: "empty",
     };
   } else {
-    newBoard[x-1][y] = {
-      id: `null-${selectedPiece.x-1}-${selectedPiece.y}`,
+    newBoard[x - 1][y] = {
+      id: `null-${selectedPiece.x - 1}-${selectedPiece.y}`,
       x: selectedPiece.x,
       y: selectedPiece.y,
       selected: false,

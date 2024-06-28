@@ -1,9 +1,4 @@
-import { useBoard } from "../../Store/store";
-import { handleBishop } from "./handleBishop";
-import { handleKnight } from "./handleKnight";
-import { handlePawn } from "./handlePawn";
-import { handleQueen } from "./handleQueen";
-import { handleRook } from "./handleRook";
+import { allOpponentPossibleMoves } from "./allOpponentPossibleMoves";
 
 interface SquareOccupancy {
     id: string;
@@ -21,12 +16,6 @@ interface moveHistory {
     piece: string,
     from: { x: number, y: number },
     to: { x: number, y: number }
-}
-
-interface validMoveInterface {
-    x: number;
-    y: number;
-    kill: boolean;
 }
 
 export function isValidMove(x: number, y: number) {
@@ -66,43 +55,16 @@ export function en_passant(opponentMoves: moveHistory[], x: number, y: number): 
 }
 
 
-export function allOpponentPossibleMoves() {
-    const boardState = useBoard.getState();
-    const currentBoard = boardState.currentBoard
-    const selectedPieceColor = boardState.selectedPlayerColor
-    const opponentColor = selectedPieceColor === "white" ? "black" : "white"
 
-    const opponentPieces = currentBoard.flat().filter((piece) => piece.pieceColor === opponentColor)
-    let validMoves: validMoveInterface[] = []
-    const opponentMoves: validMoveInterface[] = []
-
-    for (const piece of opponentPieces) {
-        switch (piece.pieceType) {
-            case "pawn":
-                validMoves = handlePawn(piece, currentBoard)
-                opponentMoves.push(...validMoves)
-                break;
-            case "rook":
-                validMoves = handleRook(piece, currentBoard)
-                opponentMoves.push(...validMoves)
-                break;
-            case "knight":
-                validMoves = handleKnight(piece, currentBoard)
-                opponentMoves.push(...validMoves)
-                break;
-            case "bishop":
-                validMoves = handleBishop(piece, currentBoard)
-                opponentMoves.push(...validMoves)
-                break;
-            case "queen":
-                validMoves = handleQueen(piece, currentBoard)
-                opponentMoves.push(...validMoves)
-                break;
-            // case "king":
-            //     validMoves = handleKing(piece, currentBoard)
-            //     opponentMoves.push(...validMoves)
-            //     break;
+export function isValidMoveForKing(x: number, y: number) {
+    if (!isValidMove(x, y)) {
+        return false;
+    }
+    const opponentMoves = allOpponentPossibleMoves()
+    for (const opponentMove of opponentMoves) {
+        if (opponentMove.x === x && opponentMove.y === y) {
+            return false;
         }
     }
-    return opponentMoves;
+    return true;
 }
