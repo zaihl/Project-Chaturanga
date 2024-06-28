@@ -4,6 +4,7 @@ import { playSound } from "../utils/playSound";
 import { useEffect } from "react";
 
 interface SquareOccupancy {
+  id: string
   pieceType: string;
   pieceColor?: "black" | "white";
   pieceSVG: React.ReactNode;
@@ -47,6 +48,8 @@ const boardBuilder = (currentBoard: SquareOccupancy[][]) => {
       );
     }
   }
+  console.log('white move history', useBoard.getState().whiteMoves)
+  console.log('black move history', useBoard.getState().blackMoves)
   console.log(board);
   return board;
 };

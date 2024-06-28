@@ -2,6 +2,7 @@ import { useBoard } from "../../Store/store";
 import { en_passant, isValidMove, moveImpact } from "./moveAnalyzer";
 
 interface SquareOccupancy {
+    id: string;
     pieceType: string;
     pieceColor?: "black" | "white";
     pieceSVG: React.ReactNode;
@@ -23,22 +24,22 @@ export function handlePawn(
     possibleBoard: SquareOccupancy[][]
 ): validMoveInterface[] {
     const boardSate = useBoard.getState()
-    const myMoves = boardSate.selectedPlayerColor === 'black' ? boardSate.blackMoves : boardSate.whiteMoves
-    const opponentMoves = boardSate.selectedPlayerColor === 'white' ? boardSate.blackMoves : boardSate.whiteMoves
+    const myMoves = selectedPiece.pieceColor === 'black' ? boardSate.blackMoves : boardSate.whiteMoves
+    const opponentMoves = selectedPiece.pieceColor === 'white' ? boardSate.blackMoves : boardSate.whiteMoves
 
-    const myFirstMove = myMoves.length === 0
+    const foundPawn = myMoves.find(move => move.piece === selectedPiece.id)
+    const pawnFirstMove = foundPawn ? false : true
 
     const validMoves: validMoveInterface[] = [];
     const currentX = selectedPiece.x;
     const currentY = selectedPiece.y;
-
-    if (boardSate.currentPlayerColor === boardSate.selectedPlayerColor) {
-        if (myFirstMove) return [{ x: currentX - 2, y: currentY, kill: false }];
+    if (selectedPiece.pieceColor === 'white') {
         const possibleMoves = [
             { x: currentX - 1, y: currentY },
             { x: currentX - 1, y: currentY - 1 },
             { x: currentX - 1, y: currentY + 1 },
         ]
+        if (pawnFirstMove) possibleMoves.push({ x: currentX - 2, y: currentY });
         for (const move of possibleMoves) {
             if (isValidMove(move.x, move.y)) {
                 const state = moveImpact(possibleBoard, move.x, move.y, selectedPiece.pieceColor)
@@ -58,12 +59,12 @@ export function handlePawn(
             }
         }
     } else {
-        if (myFirstMove) return [{ x: currentX + 2, y: currentY, kill: false }]
         const possibleMoves = [
             { x: currentX + 1, y: currentY },
             { x: currentX + 1, y: currentY - 1 },
             { x: currentX + 1, y: currentY + 1 },
         ]
+        if (pawnFirstMove) possibleMoves.push({ x: currentX + 2, y: currentY });
         for (const move of possibleMoves) {
             if (isValidMove(move.x, move.y)) {
                 const state = moveImpact(possibleBoard, move.x, move.y, selectedPiece.pieceColor!)

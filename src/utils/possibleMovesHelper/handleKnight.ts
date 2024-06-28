@@ -1,6 +1,7 @@
 import { isValidMove, moveImpact } from "./moveAnalyzer";
 
 interface SquareOccupancy {
+    id: string;
     pieceType: string;
     pieceColor?: "black" | "white";
     pieceSVG: React.ReactNode;

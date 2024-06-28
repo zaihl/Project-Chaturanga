@@ -8,6 +8,7 @@ import { handleMoveLogic } from "./handleMoveLogic";
 import { playSound } from "./playSound";
 
 interface SquareOccupancy {
+  id: string;
   pieceType: string;
   pieceColor?: "black" | "white";
   pieceSVG: React.ReactNode;
@@ -54,17 +55,20 @@ export function handleClick(
   }
 
   if (newBoard[x][y].state === "possibleMove") {
+    const selectedPiece = newBoard.flat().find((square) => square.selected) as SquareOccupancy;
+    const selectedX = selectedPiece.x;
+    const selectedY = selectedPiece.y;
     const currentColor = selectedPlayerColor;
     if (currentColor === "white") {
       setWhiteMoves({
-        piece: newBoard[x][y].pieceType,
-        from: { x: newBoard[x][y].x, y: newBoard[x][y].y },
+        piece: newBoard[selectedX][selectedY].id,
+        from: { x: selectedX, y: selectedY},
         to: { x, y },
       })
     } else {
       setBlackMoves({
-        piece: newBoard[x][y].pieceType,
-        from: { x: newBoard[x][y].x, y: newBoard[x][y].y },
+        piece: newBoard[selectedX][selectedY].id,
+        from: { x: selectedX, y: selectedY },
         to: { x, y },
       })
     }
@@ -75,7 +79,6 @@ export function handleClick(
     setBoard(possibleBoard);
     return;
   }
-
   newBoard.forEach((row) =>
     row.forEach((square) => {
       square.selected = false;
@@ -111,6 +114,7 @@ function possibleMoves(newBoard: SquareOccupancy[][]): SquareOccupancy[][] {
   }
   for (const move of validMoves) {
     possibleBoard[move.x][move.y] = {
+      id: possibleBoard[move.x][move.y].id,
       x: move.x,
       y: move.y,
       selected: false,

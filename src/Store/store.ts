@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { boardArray } from "../utils/BoardOccupancy";
 
 interface SquareOccupancy {
+    id: string,
     pieceType: string,
     pieceColor?: "black" | "white",
     pieceSVG: React.ReactNode,

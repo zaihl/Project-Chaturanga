@@ -14,20 +14,21 @@ import {
   WhiteRook,
 } from "../components/PieceSVG";
 
-
 interface SquareOccupancy {
-    pieceType: string,
-    pieceColor?: "black" | "white",
-    pieceSVG: React.ReactNode,
-    x: number;
-    y: number;
-    state: "piece" | "empty" | "possibleMove";
-    selected: boolean;
-    kill: boolean;
+  id: string;
+  pieceType: string;
+  pieceColor?: "black" | "white";
+  pieceSVG: React.ReactNode;
+  x: number;
+  y: number;
+  state: "piece" | "empty" | "possibleMove";
+  selected: boolean;
+  kill: boolean;
 }
 
 const initialPiecePositions: SquareOccupancy[] = [
   {
+    id: "black-rook-0",
     pieceType: "rook",
     pieceColor: "black",
     pieceSVG: BlackRook(),
@@ -35,19 +36,21 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 0,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
-    pieceType: "knight", 
+    id: "black-knight-1",
+    pieceType: "knight",
     pieceColor: "black",
     pieceSVG: BlackKnight(),
     x: 0,
     y: 1,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-bishop-2",
     pieceType: "bishop",
     pieceColor: "black",
     pieceSVG: BlackBishop(),
@@ -55,9 +58,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 2,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-queen",
     pieceType: "queen",
     pieceColor: "black",
     pieceSVG: BlackQueen(),
@@ -65,9 +69,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 3,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-king",
     pieceType: "king",
     pieceColor: "black",
     pieceSVG: BlackKing(),
@@ -75,9 +80,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 4,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-bishop-5",
     pieceType: "bishop",
     pieceColor: "black",
     pieceSVG: BlackBishop(),
@@ -85,9 +91,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 5,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-knight-6",
     pieceType: "knight",
     pieceColor: "black",
     pieceSVG: BlackKnight(),
@@ -95,9 +102,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 6,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-rook-7",
     pieceType: "rook",
     pieceColor: "black",
     pieceSVG: BlackRook(),
@@ -105,19 +113,21 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 7,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
-    pieceType: "pawn", 
+    id: "black-pawn-0",
+    pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
     x: 1,
     y: 0,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-pawn-1",
     pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
@@ -125,29 +135,32 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 1,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
-    pieceType: "pawn", 
+    id: "black-pawn-2",
+    pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
     x: 1,
     y: 2,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
-    pieceType: "pawn", 
+    id: "black-pawn-3",
+    pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
     x: 1,
     y: 3,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-pawn-4",
     pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
@@ -155,19 +168,21 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 4,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
-  { 
-    pieceType: "pawn", 
+  {
+    id: "black-pawn-5",
+    pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
     x: 1,
     y: 5,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-pawn-6",
     pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
@@ -175,9 +190,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 6,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "black-pawn-7",
     pieceType: "pawn",
     pieceColor: "black",
     pieceSVG: BlackPawn(),
@@ -185,9 +201,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 7,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-0",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -195,9 +212,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 0,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-1",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -205,9 +223,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 1,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-2",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -215,9 +234,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 2,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-3",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -225,9 +245,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 3,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-4",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -235,9 +256,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 4,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-5",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -245,19 +267,21 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 5,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
-    pieceType: "pawn", 
+    id: "white-pawn-6",
+    pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
     x: 6,
     y: 6,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-pawn-7",
     pieceType: "pawn",
     pieceColor: "white",
     pieceSVG: WhitePawn(),
@@ -265,9 +289,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 7,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-rook-0",
     pieceType: "rook",
     pieceColor: "white",
     pieceSVG: WhiteRook(),
@@ -275,9 +300,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 0,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-knight-1",
     pieceType: "knight",
     pieceColor: "white",
     pieceSVG: WhiteKnight(),
@@ -285,9 +311,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 1,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-bishop-2",
     pieceType: "bishop",
     pieceColor: "white",
     pieceSVG: WhiteBishop(),
@@ -295,9 +322,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 2,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-queen",
     pieceType: "queen",
     pieceColor: "white",
     pieceSVG: WhiteQueen(),
@@ -305,9 +333,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 3,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-king",
     pieceType: "king",
     pieceColor: "white",
     pieceSVG: WhiteKing(),
@@ -315,9 +344,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 4,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-bishop-5",
     pieceType: "bishop",
     pieceColor: "white",
     pieceSVG: WhiteBishop(),
@@ -325,9 +355,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 5,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-knight-6",
     pieceType: "knight",
     pieceColor: "white",
     pieceSVG: WhiteKnight(),
@@ -335,9 +366,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 6,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
   {
+    id: "white-rook-7",
     pieceType: "rook",
     pieceColor: "white",
     pieceSVG: WhiteRook(),
@@ -345,9 +377,10 @@ const initialPiecePositions: SquareOccupancy[] = [
     y: 7,
     state: "piece",
     selected: false,
-    kill: false
+    kill: false,
   },
 ];
+
 
 const boardArray: SquareOccupancy[][] = [];
 
@@ -360,10 +393,18 @@ for (let x = 0; x < 8; x++) {
     if (piece) {
       boardArray[x][y] = piece;
     } else {
-      boardArray[x][y] = { pieceType: "null", pieceSVG: <></>, x, y, state: "empty", selected: false, kill: false };
+      boardArray[x][y] = {
+        id: `null-${x}-${y}`,
+        pieceType: "null",
+        pieceSVG: <></>,
+        x,
+        y,
+        state: "empty",
+        selected: false,
+        kill: false,
+      };
     }
   }
 }
 
-export { boardArray }
-
+export { boardArray };
