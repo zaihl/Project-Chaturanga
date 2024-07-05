@@ -13,18 +13,7 @@ import {
   WhiteQueen,
   WhiteRook,
 } from "../components/PieceSVG";
-
-interface SquareOccupancy {
-  id: string;
-  pieceType: string;
-  pieceColor?: "black" | "white";
-  pieceSVG: React.ReactNode;
-  x: number;
-  y: number;
-  state: "piece" | "empty" | "possibleMove";
-  selected: boolean;
-  kill: boolean;
-}
+import { SquareOccupancy } from "./handleSquareClick";
 
 const initialPiecePositions: SquareOccupancy[] = [
   {

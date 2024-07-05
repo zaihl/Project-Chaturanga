@@ -15,30 +15,31 @@ export function handleMoveLogic(
   x: number,
   y: number
 ) {
-  const selectedPiece = newBoard
+  const currentBoard = newBoard.slice().map(row => row.slice().map(sq => ({...sq})))
+  const selectedPiece = currentBoard
     .flat()
     .find((square) => square.selected) as SquareOccupancy;
 
-  const emptySquare = newBoard
+  const emptySquare = currentBoard
     .flat()
     .find((square) => square.state === "empty") as SquareOccupancy;
   const emptySVG = emptySquare.pieceSVG;
   if (
-    newBoard[x][y].pieceType === "null" &&
+    currentBoard[x][y].pieceType === "null" &&
     selectedPiece.pieceType === "pawn" &&
     (selectedPiece.x === x + 1 || selectedPiece.x === x - 1) &&
     (selectedPiece.y === y + 1 || selectedPiece.y === y - 1) &&
-    (newBoard[x + 1][y].pieceType === "pawn" ||
-      newBoard[x - 1][y].pieceType === "pawn")
+    (currentBoard[x + 1][y].pieceType === "pawn" ||
+      currentBoard[x - 1][y].pieceType === "pawn")
   ) {
-    handleEnPassant(newBoard, x, y, selectedPiece, emptySVG);
+    handleEnPassant(currentBoard, x, y, selectedPiece, emptySVG);
   }
-  newBoard[x][y] = {
+  currentBoard[x][y] = {
     ...selectedPiece,
     x,
     y,
   };
-  newBoard[selectedPiece.x][selectedPiece.y] = {
+  currentBoard[selectedPiece.x][selectedPiece.y] = {
     id: selectedPiece.id,
     x: selectedPiece.x,
     y: selectedPiece.y,
@@ -48,28 +49,26 @@ export function handleMoveLogic(
     kill: false,
     state: "empty",
   };
-  newBoard.forEach((row) =>
+  currentBoard.forEach((row) =>
     row.forEach((square) => {
       square.selected = false;
       square.kill = false;
       square.state = square.pieceColor === undefined ? "empty" : "piece";
     })
   );
-  return newBoard;
+  return currentBoard;
 }
 
 function handleEnPassant(
-  newBoard: SquareOccupancy[][],
+  currentBoard: SquareOccupancy[][],
   x: number,
   y: number,
   selectedPiece: SquareOccupancy,
   emptySVG: React.ReactNode
 ) {
   const selectedColor = selectedPiece.pieceColor;
-  console.log("here in en passant handler");
-  console.log(x, y, selectedPiece);
   if (selectedColor === "white") {
-    newBoard[x + 1][y] = {
+    currentBoard[x + 1][y] = {
       id: `null-${selectedPiece.x + 1}-${selectedPiece.y}`,
       x: selectedPiece.x,
       y: selectedPiece.y,
@@ -80,7 +79,7 @@ function handleEnPassant(
       state: "empty",
     };
   } else {
-    newBoard[x - 1][y] = {
+    currentBoard[x - 1][y] = {
       id: `null-${selectedPiece.x - 1}-${selectedPiece.y}`,
       x: selectedPiece.x,
       y: selectedPiece.y,

@@ -2,6 +2,7 @@ import { useBoard } from "../Store/store";
 import Square from "./Square";
 import { playSound } from "../utils/playSound";
 import { useEffect } from "react";
+import Checkmate from "./Checkate";
 
 interface SquareOccupancy {
   id: string
@@ -24,10 +25,14 @@ const Board = () => {
     playSound("move");
     playSound("kill")
   }, [])
+  console.log(currentBoard)
   return (
-    <div className="grid grid-cols-8 grid-rows-8 w-96 md:w-[42rem] rounded-lg overflow-hidden">
-      {renderedBoard}
-    </div>
+    <>
+      {gameOver && <Checkmate />}
+      <div className="grid grid-cols-8 grid-rows-8 w-96 md:w-[42rem] rounded-lg overflow-hidden">
+        {renderedBoard}
+      </div>
+    </>
   );
 };
 
@@ -50,9 +55,6 @@ const boardBuilder = (currentBoard: SquareOccupancy[][]) => {
       );
     }
   }
-  console.log('white move history', useBoard.getState().whiteMoves)
-  console.log('black move history', useBoard.getState().blackMoves)
-  console.log(board);
   return board;
 };
 

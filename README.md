@@ -15,5 +15,5 @@
 - [x] Add queen moving and capturing logic
 - [x] Add checks
 - [x] Add king moving and capturing logic
-- [ ] Add checkmates
+- [x] Add checkmates
 - [ ] Add king castle

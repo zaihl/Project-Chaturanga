@@ -1,15 +1,11 @@
 import { useBoard } from "../Store/store";
-import { handlePawn } from "./possibleMovesHelper/handlePawn";
-import { handleKnight } from "./possibleMovesHelper/handleKnight";
-import { handleBishop } from "./possibleMovesHelper/handleBishop";
-import { handleRook } from "./possibleMovesHelper/handleRook";
-import { handleQueen } from "./possibleMovesHelper/handleQueen";
 import { handleMoveLogic } from "./handleMoveLogic";
 import { playSound } from "./playSound";
 import { isKingChecked } from "./isKingChecked";
-import { handleKing } from "./possibleMovesHelper/handleKing";
+import { possibleMoves } from "./possibleMoves";
+import { handleCheckmate } from "./handleCheckmate";
 
-interface SquareOccupancy {
+export interface SquareOccupancy {
   id: string;
   pieceType: string;
   pieceColor?: "black" | "white";
@@ -21,7 +17,7 @@ interface SquareOccupancy {
   kill: boolean;
 }
 
-interface validMoveInterface {
+export interface validMoveInterface {
   x: number;
   y: number;
   kill: boolean;
@@ -38,13 +34,12 @@ export function handleClick(
   const setWhiteMoves = boardState.setWhiteMoves;
   const setBlackMoves = boardState.setBlackMoves;
   const setCheck = boardState.setCheck;
-  const setGameOver = boardState.setGameOver;
 
   const board = useBoard.getState().currentBoard;
   const setBoard = useBoard.getState().setBoard;
   e.preventDefault();
 
-  const newBoard = board.slice();
+  const newBoard = board.slice().map(row => row.slice().map(sq => ({...sq})));
 
   if (newBoard[x][y].pieceColor !== selectedPlayerColor && newBoard[x][y].state !== "possibleMove") {
     newBoard.forEach((row) =>
@@ -64,7 +59,7 @@ export function handleClick(
     const selectedY = selectedPiece.y;
     const currentColor = selectedPlayerColor;
     
-    let tempBoard = board.map(row => row.slice().map(sq => ({...sq})));
+    let tempBoard = newBoard.slice().map(row => row.slice().map(sq => ({...sq})));
 
     tempBoard = handleMoveLogic(tempBoard, x, y);
 
@@ -104,12 +99,7 @@ export function handleClick(
     possibleBoard[x][y].selected = true;
     if (isKingChecked(possibleBoard, newColor)) {
       setCheck(true);
-      const selectedKing = possibleBoard.flat().find(sq => sq.pieceColor !== currentColor && sq.pieceType === "king")!
-      const validMoves = handleKing(selectedKing, possibleBoard);
-      console.log("here are the valid moves", validMoves);
-      if (validMoves.length===0) {
-        setGameOver(true);
-      }
+      handleCheckmate(currentColor);
     }
     possibleBoard[x][y].selected = false;
     return;
@@ -124,42 +114,4 @@ export function handleClick(
   newBoard[x][y].selected = newBoard[x][y].state === "empty" ? false : true;
   const possibleBoard = possibleMoves(newBoard);
   setBoard(possibleBoard);
-}
-
-function possibleMoves(newBoard: SquareOccupancy[][]): SquareOccupancy[][] {
-  const possibleBoard = newBoard;
-  const selectedRow = newBoard.find((row) => row.find((sq) => sq.selected));
-  if (selectedRow === undefined) return possibleBoard;
-  const selectedPiece = selectedRow.find((square) => square.selected);
-  if (selectedPiece === undefined) return possibleBoard;
-  const pieceType = selectedPiece.pieceType;
-  let validMoves: validMoveInterface[] = [];
-  if (pieceType === "pawn") {
-    validMoves = handlePawn(selectedPiece, possibleBoard);
-  } else if (pieceType === "knight") {
-    validMoves = handleKnight(selectedPiece, possibleBoard);
-  } else if (pieceType === "rook") {
-    validMoves = handleRook(selectedPiece, possibleBoard);
-  } else if (pieceType === "bishop") {
-    validMoves = handleBishop(selectedPiece, possibleBoard);
-  } else if (pieceType === "queen") {
-    validMoves = handleQueen(selectedPiece, possibleBoard);
-  } else if (pieceType === "king") {
-    validMoves = handleKing(selectedPiece, possibleBoard);
-  }
-  for (const move of validMoves) {
-    possibleBoard[move.x][move.y] = {
-      id: possibleBoard[move.x][move.y].id,
-      x: move.x,
-      y: move.y,
-      selected: false,
-      pieceType: possibleBoard[move.x][move.y].pieceType,
-      pieceSVG: possibleBoard[move.x][move.y].pieceSVG,
-      pieceColor: possibleBoard[move.x][move.y].pieceColor,
-      kill: move.kill,
-      state: "possibleMove",
-    };
-  }
-
-  return possibleBoard;
 }
