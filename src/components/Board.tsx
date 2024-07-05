@@ -17,6 +17,8 @@ interface SquareOccupancy {
 
 const Board = () => {
   const currentBoard = useBoard((state) => state.currentBoard);
+  const gameOver = useBoard((state) => state.gameOver)
+  console.log("IS IT CHECKMATE? ", gameOver)
   const renderedBoard = boardBuilder(currentBoard);
   useEffect(() => {
     playSound("move");

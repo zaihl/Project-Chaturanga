@@ -6,6 +6,8 @@ import { handleRook } from "./possibleMovesHelper/handleRook";
 import { handleQueen } from "./possibleMovesHelper/handleQueen";
 import { handleMoveLogic } from "./handleMoveLogic";
 import { playSound } from "./playSound";
+import { isKingChecked } from "./isKingChecked";
+import { handleKing } from "./possibleMovesHelper/handleKing";
 
 interface SquareOccupancy {
   id: string;
@@ -35,6 +37,8 @@ export function handleClick(
   const setSelectedPlayerColor = boardState.setSelectedPlayerColor;
   const setWhiteMoves = boardState.setWhiteMoves;
   const setBlackMoves = boardState.setBlackMoves;
+  const setCheck = boardState.setCheck;
+  const setGameOver = boardState.setGameOver;
 
   const board = useBoard.getState().currentBoard;
   const setBoard = useBoard.getState().setBoard;
@@ -59,6 +63,25 @@ export function handleClick(
     const selectedX = selectedPiece.x;
     const selectedY = selectedPiece.y;
     const currentColor = selectedPlayerColor;
+    
+    let tempBoard = board.map(row => row.slice().map(sq => ({...sq})));
+
+    tempBoard = handleMoveLogic(tempBoard, x, y);
+
+    if (isKingChecked(tempBoard, currentColor)) {
+      newBoard.forEach((row) =>
+        row.forEach((square) => {
+          square.selected = false;
+          square.kill = false;
+          square.state = square.pieceColor === undefined ? "empty" : "piece";
+        })
+      );
+      newBoard[selectedX][selectedY].selected = true;
+      setCheck(true);
+      setBoard(newBoard);
+      return;
+    }
+
     if (currentColor === "white") {
       setWhiteMoves({
         piece: newBoard[selectedX][selectedY].id,
@@ -77,6 +100,18 @@ export function handleClick(
     const possibleBoard = handleMoveLogic(newBoard, x, y);
     setSelectedPlayerColor(newColor);
     setBoard(possibleBoard);
+
+    possibleBoard[x][y].selected = true;
+    if (isKingChecked(possibleBoard, newColor)) {
+      setCheck(true);
+      const selectedKing = possibleBoard.flat().find(sq => sq.pieceColor !== currentColor && sq.pieceType === "king")!
+      const validMoves = handleKing(selectedKing, possibleBoard);
+      console.log("here are the valid moves", validMoves);
+      if (validMoves.length===0) {
+        setGameOver(true);
+      }
+    }
+    possibleBoard[x][y].selected = false;
     return;
   }
   newBoard.forEach((row) =>
@@ -110,7 +145,7 @@ function possibleMoves(newBoard: SquareOccupancy[][]): SquareOccupancy[][] {
   } else if (pieceType === "queen") {
     validMoves = handleQueen(selectedPiece, possibleBoard);
   } else if (pieceType === "king") {
-    validMoves = handlePawn(selectedPiece, possibleBoard);
+    validMoves = handleKing(selectedPiece, possibleBoard);
   }
   for (const move of validMoves) {
     possibleBoard[move.x][move.y] = {

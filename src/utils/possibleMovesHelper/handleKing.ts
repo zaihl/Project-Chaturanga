@@ -38,7 +38,7 @@ export function handleKing(
     ]
 
     for (const move of possibleMoves) {
-        if (isValidMoveForKing(move.x, move.y)) {
+        if (isValidMoveForKing(move.x, move.y, possibleBoard, selectedPiece.pieceColor!)) {
             const state = moveImpact(possibleBoard, move.x, move.y, selectedPiece.pieceColor!)
             if (state !== 'self') {
                 validMoves.push({

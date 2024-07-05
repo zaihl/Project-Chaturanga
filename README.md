@@ -13,6 +13,7 @@
 - [x] Add bishop moving and capturing logic
 - [x] Add knight moving and capturing logic
 - [x] Add queen moving and capturing logic
-- [ ] Add checks
-- [ ] Add king moving and capturing logic
+- [x] Add checks
+- [x] Add king moving and capturing logic
 - [ ] Add checkmates
+- [ ] Add king castle

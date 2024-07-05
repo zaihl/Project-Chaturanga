@@ -1,4 +1,4 @@
-import { allOpponentPossibleMoves } from "./allOpponentPossibleMoves";
+import { allPossibleMovesOfGivenColor } from "./allOpponentPossibleMoves";
 
 interface SquareOccupancy {
     id: string;
@@ -56,11 +56,12 @@ export function en_passant(opponentMoves: moveHistory[], x: number, y: number): 
 
 
 
-export function isValidMoveForKing(x: number, y: number) {
+export function isValidMoveForKing(x: number, y: number, currentBoard: SquareOccupancy[][], selectedColor: "white" | "black") {
     if (!isValidMove(x, y)) {
         return false;
     }
-    const opponentMoves = allOpponentPossibleMoves()
+    const opponentColor = selectedColor === "black" ? "white" : "black";
+    const opponentMoves = allPossibleMovesOfGivenColor(currentBoard, opponentColor)
     for (const opponentMove of opponentMoves) {
         if (opponentMove.x === x && opponentMove.y === y) {
             return false;

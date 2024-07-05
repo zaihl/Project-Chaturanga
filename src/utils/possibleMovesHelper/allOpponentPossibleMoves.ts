@@ -1,4 +1,3 @@
-import { useBoard } from "../../Store/store";
 import { isValidMove, moveImpact } from "./moveAnalyzer";
 
 interface validMoveInterface {
@@ -25,12 +24,7 @@ interface validMoveInterface {
     kill: boolean;
 }
 
-export function allOpponentPossibleMoves() {
-    const boardState = useBoard.getState();
-    const currentBoard = boardState.currentBoard
-    const selectedPieceColor = boardState.selectedPlayerColor
-    const opponentColor = selectedPieceColor === "white" ? "black" : "white"
-
+export function allPossibleMovesOfGivenColor(currentBoard: SquareOccupancy[][], opponentColor: "white" | "black") {
     const opponentPieces = currentBoard.flat().filter((piece) => piece.pieceColor === opponentColor)
     let validMoves: validMoveInterface[] = []
     const opponentMoves: validMoveInterface[] = []
