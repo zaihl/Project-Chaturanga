@@ -4,7 +4,7 @@ import { handleRook } from "./handleRook";
 
 export function handleQueen(
   selectedPiece: SquareOccupancy,
-  possibleBoard: SquareOccupancy[][]
+  possibleBoard: SquareOccupancy[][],
 ): validMoveInterface[] {
   const validMoves: validMoveInterface[] = [];
 

@@ -375,7 +375,7 @@ for (let x = 0; x < 8; x++) {
   boardArray.push([]);
   for (let y = 0; y < 8; y++) {
     const piece = initialPiecePositions.find(
-      (piece) => piece.x === x && piece.y === y
+      (piece) => piece.x === x && piece.y === y,
     );
     if (piece) {
       boardArray[x][y] = piece;

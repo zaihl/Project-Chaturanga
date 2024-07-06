@@ -9,7 +9,7 @@ import { SquareOccupancy } from "./interfaces";
 export function handleClick(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   x: number,
-  y: number
+  y: number,
 ) {
   const boardState = useBoard.getState();
   const selectedPlayerColor = boardState.selectedPlayerColor;
@@ -22,27 +22,36 @@ export function handleClick(
   const setBoard = useBoard.getState().setBoard;
   e.preventDefault();
 
-  const newBoard = board.slice().map(row => row.slice().map(sq => ({...sq})));
+  const newBoard = board
+    .slice()
+    .map((row) => row.slice().map((sq) => ({ ...sq })));
 
-  if (newBoard[x][y].pieceColor !== selectedPlayerColor && newBoard[x][y].state !== "possibleMove") {
+  if (
+    newBoard[x][y].pieceColor !== selectedPlayerColor &&
+    newBoard[x][y].state !== "possibleMove"
+  ) {
     newBoard.forEach((row) =>
       row.forEach((square) => {
         square.selected = false;
         square.kill = false;
         square.state = square.pieceColor === undefined ? "empty" : "piece";
-      })
+      }),
     );
     setBoard(newBoard);
     return;
   }
 
   if (newBoard[x][y].state === "possibleMove") {
-    const selectedPiece = newBoard.flat().find((square) => square.selected) as SquareOccupancy;
+    const selectedPiece = newBoard
+      .flat()
+      .find((square) => square.selected) as SquareOccupancy;
     const selectedX = selectedPiece.x;
     const selectedY = selectedPiece.y;
     const currentColor = selectedPlayerColor;
-    
-    let tempBoard = newBoard.slice().map(row => row.slice().map(sq => ({...sq})));
+
+    let tempBoard = newBoard
+      .slice()
+      .map((row) => row.slice().map((sq) => ({ ...sq })));
     tempBoard = handleMoveLogic(tempBoard, x, y);
 
     // if king is checked, we cannot make a move that would remove the check
@@ -52,7 +61,7 @@ export function handleClick(
           square.selected = false;
           square.kill = false;
           square.state = square.pieceColor === undefined ? "empty" : "piece";
-        })
+        }),
       );
       newBoard[selectedX][selectedY].selected = true;
       setCheck(true);
@@ -63,15 +72,15 @@ export function handleClick(
     if (currentColor === "white") {
       setWhiteMoves({
         piece: newBoard[selectedX][selectedY].id,
-        from: { x: selectedX, y: selectedY},
+        from: { x: selectedX, y: selectedY },
         to: { x, y },
-      })
+      });
     } else {
       setBlackMoves({
         piece: newBoard[selectedX][selectedY].id,
         from: { x: selectedX, y: selectedY },
         to: { x, y },
-      })
+      });
     }
 
     const newColor = selectedPlayerColor === "black" ? "white" : "black";
@@ -95,7 +104,7 @@ export function handleClick(
       square.selected = false;
       square.kill = false;
       square.state = square.pieceColor === undefined ? "empty" : "piece";
-    })
+    }),
   );
   newBoard[x][y].selected = newBoard[x][y].state === "empty" ? false : true;
   const possibleBoard = possibleMoves(newBoard);

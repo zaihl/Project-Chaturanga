@@ -3,9 +3,11 @@ import { SquareOccupancy } from "./interfaces";
 export function handleMoveLogic(
   newBoard: SquareOccupancy[][],
   x: number,
-  y: number
+  y: number,
 ) {
-  const currentBoard = newBoard.slice().map(row => row.slice().map(sq => ({...sq})))
+  const currentBoard = newBoard
+    .slice()
+    .map((row) => row.slice().map((sq) => ({ ...sq })));
   const selectedPiece = currentBoard
     .flat()
     .find((square) => square.selected) as SquareOccupancy;
@@ -55,7 +57,7 @@ export function handleMoveLogic(
       square.selected = false;
       square.kill = false;
       square.state = square.pieceColor === undefined ? "empty" : "piece";
-    })
+    }),
   );
   return currentBoard;
 }
@@ -65,7 +67,7 @@ function handleEnPassant(
   x: number,
   y: number,
   selectedPiece: SquareOccupancy,
-  emptySVG: React.ReactNode
+  emptySVG: React.ReactNode,
 ) {
   const selectedColor = selectedPiece.pieceColor;
   if (selectedColor === "white") {
@@ -93,11 +95,19 @@ function handleEnPassant(
   }
 }
 
-function handleCastle(currentBoard: SquareOccupancy[][], x: number, y: number, myKing: SquareOccupancy, emptySVG: React.ReactNode) {
-  const currentRookPos = myKing.y > y ? y-2 : y+1;
-  const newRookPos = myKing.y > y ? y+1 : y-1;
-  const currentX = myKing.x
-  const rook = currentBoard.flat().find(sq => sq.y === currentRookPos && sq.x === currentX)!
+function handleCastle(
+  currentBoard: SquareOccupancy[][],
+  x: number,
+  y: number,
+  myKing: SquareOccupancy,
+  emptySVG: React.ReactNode,
+) {
+  const currentRookPos = myKing.y > y ? y - 2 : y + 1;
+  const newRookPos = myKing.y > y ? y + 1 : y - 1;
+  const currentX = x;
+  const rook = currentBoard
+    .flat()
+    .find((sq) => sq.y === currentRookPos && sq.x === currentX)!;
 
   currentBoard[currentX][newRookPos] = {
     ...rook,
@@ -114,5 +124,4 @@ function handleCastle(currentBoard: SquareOccupancy[][], x: number, y: number, m
     kill: false,
     state: "empty",
   };
-
 }

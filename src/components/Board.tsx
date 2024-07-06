@@ -7,12 +7,12 @@ import { SquareOccupancy } from "../utils/interfaces";
 
 const Board = () => {
   const currentBoard = useBoard((state) => state.currentBoard);
-  const gameOver = useBoard((state) => state.gameOver)
+  const gameOver = useBoard((state) => state.gameOver);
   const renderedBoard = boardBuilder(currentBoard);
   useEffect(() => {
     playSound("move");
-    playSound("kill")
-  }, [])
+    playSound("kill");
+  }, []);
   return (
     <>
       {gameOver && <Checkmate />}

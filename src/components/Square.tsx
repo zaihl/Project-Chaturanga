@@ -17,8 +17,8 @@ const Square = ({
     : (x % 2 === 0 && y % 2 === 0) || (x % 2 === 1 && y % 2 === 1)
       ? "bg-green-300"
       : "bg-green-100";
-  const dim = (state === 'possibleMove' && !kill) ? 'sepia' : ''
-  const cursor = (state === 'empty') ? "cursor-default" : "cursor-pointer"
+  const dim = state === "possibleMove" && !kill ? "sepia" : "";
+  const cursor = state === "empty" ? "cursor-default" : "cursor-pointer";
   return (
     <div className={`${bgColor}`}>
       <button
