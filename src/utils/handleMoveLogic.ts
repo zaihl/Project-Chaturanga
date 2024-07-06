@@ -26,7 +26,15 @@ export function handleMoveLogic(
   ) {
     handleEnPassant(currentBoard, x, y, selectedPiece, emptySVG);
   }
-  
+
+  if (
+    selectedPiece.pieceType === "king" &&
+    Math.abs(selectedPiece.y - y) === 2 &&
+    selectedPiece.x === x
+  ) {
+    handleCastle(currentBoard, x, y, selectedPiece, emptySVG);
+  }
+
   currentBoard[x][y] = {
     ...selectedPiece,
     x,
@@ -83,4 +91,28 @@ function handleEnPassant(
       state: "empty",
     };
   }
+}
+
+function handleCastle(currentBoard: SquareOccupancy[][], x: number, y: number, myKing: SquareOccupancy, emptySVG: React.ReactNode) {
+  const currentRookPos = myKing.y > y ? y-2 : y+1;
+  const newRookPos = myKing.y > y ? y+1 : y-1;
+  const currentX = myKing.x
+  const rook = currentBoard.flat().find(sq => sq.y === currentRookPos && sq.x === currentX)!
+
+  currentBoard[currentX][newRookPos] = {
+    ...rook,
+    x: currentX,
+    y: newRookPos,
+  };
+  currentBoard[rook.x][rook.y] = {
+    id: rook.id,
+    x: rook.x,
+    y: rook.y,
+    selected: false,
+    pieceType: "null",
+    pieceSVG: emptySVG,
+    kill: false,
+    state: "empty",
+  };
+
 }

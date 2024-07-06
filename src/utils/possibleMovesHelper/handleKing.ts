@@ -1,11 +1,12 @@
 import { SquareOccupancy, validMoveInterface } from "../interfaces";
+import { handleCastle } from "./handleCastle";
 import { isValidMoveForKing, moveImpact } from "./moveAnalyzer";
 
 export function handleKing(
     selectedPiece: SquareOccupancy,
     possibleBoard: SquareOccupancy[][]
 ): validMoveInterface[] {
-    const validMoves: validMoveInterface[] = [];
+    let validMoves: validMoveInterface[] = [];
     const currentX = selectedPiece.x;
     const currentY = selectedPiece.y;
 
@@ -31,6 +32,9 @@ export function handleKing(
             }
         }
     }
+
+    const castleMoves = handleCastle(possibleBoard, selectedPiece.pieceColor!)
+    if (castleMoves.length>0) validMoves = [...validMoves, ...castleMoves]
 
     return validMoves;
 }

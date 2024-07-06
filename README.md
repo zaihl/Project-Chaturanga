@@ -11,8 +11,8 @@
 - [x] Add checks
 - [x] Add king moving and capturing logic
 - [x] Add checkmates
-- [ ] Refactor code. Make it cleaner.
-- [ ] Add king castle
+- [x] Refactor code. Make it cleaner.
+- [x] Add king castle
 - [ ] Add pawn promotion
 - [ ] Implement move history
 - [ ] Detect and handle stalemates
