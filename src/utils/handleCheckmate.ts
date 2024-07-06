@@ -1,6 +1,6 @@
 import { useBoard } from "../Store/store";
 import { handleMoveLogic } from "./handleMoveLogic";
-import { SquareOccupancy } from "./handleSquareClick";
+import { SquareOccupancy } from "./interfaces";
 import { isKingChecked } from "./isKingChecked";
 import { possibleMoves } from "./possibleMoves";
 
@@ -36,11 +36,9 @@ export function handleCheckmate(currentColor: "white" | "black") {
             const tempBoard = handleMoveLogic(currentBoard, move.x, move.y)
             const isChecked = isKingChecked(tempBoard, opponentColor)
             if (!isChecked) {
-                console.log('not checked')
                 return;
             }
         }
     }
-    console.log("The count is :::::: ", count)
     setGameOver(true)
 }

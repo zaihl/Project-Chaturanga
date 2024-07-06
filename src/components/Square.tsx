@@ -1,15 +1,5 @@
 import { handleClick } from "../utils/handleSquareClick";
-
-interface SquareProps {
-  pieceType: string;
-  pieceColor?: "black" | "white";
-  pieceSVG: React.ReactNode;
-  x: number;
-  y: number;
-  state: "piece" | "empty" | "possibleMove";
-  selected: boolean;
-  kill: boolean;
-}
+import { SquareProps } from "../utils/interfaces";
 
 const Square = ({
   pieceSVG,

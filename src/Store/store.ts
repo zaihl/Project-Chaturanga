@@ -1,23 +1,6 @@
 import { create } from "zustand";
 import { boardArray } from "../utils/BoardOccupancy";
-
-interface SquareOccupancy {
-    id: string,
-    pieceType: string,
-    pieceColor?: "black" | "white",
-    pieceSVG: React.ReactNode,
-    x: number;
-    y: number;
-    state: "piece" | "empty" | "possibleMove",
-    selected: boolean;
-    kill: boolean;
-}
-
-interface moveHistory {
-    piece: string,
-    from: {x: number, y: number},
-    to: {x: number, y: number}
-}
+import { moveHistory, SquareOccupancy } from "../utils/interfaces";
 
 type boardStore = {
     currentPlayerColor: "white" | "black", // set at the beginning of game

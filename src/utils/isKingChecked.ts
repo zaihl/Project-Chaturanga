@@ -1,4 +1,4 @@
-import { SquareOccupancy } from "./handleSquareClick";
+import { SquareOccupancy } from "./interfaces";
 import { allPossibleMovesOfGivenColor } from "./possibleMovesHelper/allOpponentPossibleMoves";
 
 export function isKingChecked(currentBoard: SquareOccupancy[][], myColor: "white" | "black") {

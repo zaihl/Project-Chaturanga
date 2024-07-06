@@ -1,14 +1,4 @@
-interface SquareOccupancy {
-  id: string;
-  pieceType: string;
-  pieceColor?: "black" | "white";
-  pieceSVG: React.ReactNode;
-  x: number;
-  y: number;
-  state: "piece" | "empty" | "possibleMove";
-  selected: boolean;
-  kill: boolean;
-}
+import { SquareOccupancy } from "./interfaces";
 
 export function handleMoveLogic(
   newBoard: SquareOccupancy[][],
@@ -23,7 +13,9 @@ export function handleMoveLogic(
   const emptySquare = currentBoard
     .flat()
     .find((square) => square.state === "empty") as SquareOccupancy;
+
   const emptySVG = emptySquare.pieceSVG;
+
   if (
     currentBoard[x][y].pieceType === "null" &&
     selectedPiece.pieceType === "pawn" &&
@@ -34,6 +26,7 @@ export function handleMoveLogic(
   ) {
     handleEnPassant(currentBoard, x, y, selectedPiece, emptySVG);
   }
+  
   currentBoard[x][y] = {
     ...selectedPiece,
     x,

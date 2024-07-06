@@ -4,24 +4,7 @@ import { playSound } from "./playSound";
 import { isKingChecked } from "./isKingChecked";
 import { possibleMoves } from "./possibleMoves";
 import { handleCheckmate } from "./handleCheckmate";
-
-export interface SquareOccupancy {
-  id: string;
-  pieceType: string;
-  pieceColor?: "black" | "white";
-  pieceSVG: React.ReactNode;
-  x: number;
-  y: number;
-  state: "piece" | "empty" | "possibleMove";
-  selected: boolean;
-  kill: boolean;
-}
-
-export interface validMoveInterface {
-  x: number;
-  y: number;
-  kill: boolean;
-}
+import { SquareOccupancy } from "./interfaces";
 
 export function handleClick(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -60,9 +43,9 @@ export function handleClick(
     const currentColor = selectedPlayerColor;
     
     let tempBoard = newBoard.slice().map(row => row.slice().map(sq => ({...sq})));
-
     tempBoard = handleMoveLogic(tempBoard, x, y);
 
+    // if king is checked, we cannot make a move that would remove the check
     if (isKingChecked(tempBoard, currentColor)) {
       newBoard.forEach((row) =>
         row.forEach((square) => {
@@ -90,18 +73,21 @@ export function handleClick(
         to: { x, y },
       })
     }
+
     const newColor = selectedPlayerColor === "black" ? "white" : "black";
     newBoard[x][y].kill ? playSound("kill") : playSound("move");
     const possibleBoard = handleMoveLogic(newBoard, x, y);
     setSelectedPlayerColor(newColor);
     setBoard(possibleBoard);
 
+    // checking if opponent's move ended up giving us check
     possibleBoard[x][y].selected = true;
     if (isKingChecked(possibleBoard, newColor)) {
       setCheck(true);
       handleCheckmate(currentColor);
     }
     possibleBoard[x][y].selected = false;
+
     return;
   }
   newBoard.forEach((row) =>

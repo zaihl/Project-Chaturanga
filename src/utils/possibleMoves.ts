@@ -1,4 +1,4 @@
-import { SquareOccupancy, validMoveInterface } from "./handleSquareClick";
+import { SquareOccupancy, validMoveInterface } from "./interfaces";
 import { handleBishop } from "./possibleMovesHelper/handleBishop";
 import { handleKing } from "./possibleMovesHelper/handleKing";
 import { handleKnight } from "./possibleMovesHelper/handleKnight";

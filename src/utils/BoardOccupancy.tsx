@@ -12,7 +12,7 @@ import {
   WhiteQueen,
   WhiteRook,
 } from "../components/PieceSVG";
-import { SquareOccupancy } from "./handleSquareClick";
+import { SquareOccupancy } from "./interfaces";
 
 const initialPiecePositions: SquareOccupancy[] = [
   {
@@ -368,7 +368,6 @@ const initialPiecePositions: SquareOccupancy[] = [
     kill: false,
   },
 ];
-
 
 const boardArray: SquareOccupancy[][] = [];
 

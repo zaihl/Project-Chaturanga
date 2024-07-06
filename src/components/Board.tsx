@@ -3,29 +3,16 @@ import Square from "./Square";
 import { playSound } from "../utils/playSound";
 import { useEffect } from "react";
 import Checkmate from "./Checkate";
-
-interface SquareOccupancy {
-  id: string
-  pieceType: string;
-  pieceColor?: "black" | "white";
-  pieceSVG: React.ReactNode;
-  x: number;
-  y: number;
-  state: "piece" | "empty" | "possibleMove";
-  selected: boolean;
-  kill: boolean;
-}
+import { SquareOccupancy } from "../utils/interfaces";
 
 const Board = () => {
   const currentBoard = useBoard((state) => state.currentBoard);
   const gameOver = useBoard((state) => state.gameOver)
-  console.log("IS IT CHECKMATE? ", gameOver)
   const renderedBoard = boardBuilder(currentBoard);
   useEffect(() => {
     playSound("move");
     playSound("kill")
   }, [])
-  console.log(currentBoard)
   return (
     <>
       {gameOver && <Checkmate />}

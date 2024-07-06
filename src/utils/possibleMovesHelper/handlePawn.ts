@@ -1,23 +1,6 @@
 import { useBoard } from "../../Store/store";
+import { SquareOccupancy, validMoveInterface } from "../interfaces";
 import { en_passant, isValidMove, moveImpact } from "./moveAnalyzer";
-
-interface SquareOccupancy {
-    id: string;
-    pieceType: string;
-    pieceColor?: "black" | "white";
-    pieceSVG: React.ReactNode;
-    x: number;
-    y: number;
-    state: "piece" | "empty" | "possibleMove";
-    selected: boolean;
-    kill: boolean;
-}
-
-interface validMoveInterface {
-    x: number;
-    y: number;
-    kill: boolean;
-}
 
 export function handlePawn(
     selectedPiece: SquareOccupancy,
