@@ -1,13 +1,8 @@
-### To do
+### To Do
 - [x] Create board
 - [x] Place chess pieces
 - [x] Assign allowed moves to pieces
-- [x] Scrape the entire code
-- [x] Migrate to Zustand
-- [x] Create board
-- [x] Place chess pieces
-- [x] Assign allowed moves to pieces
-- [x] Assign not-allowed moves 
+- [x] Assign not-allowed moves
 - [x] Add pawn moving and capturing logic
 - [x] Add rook moving and capturing logic
 - [x] Add bishop moving and capturing logic
@@ -16,4 +11,15 @@
 - [x] Add checks
 - [x] Add king moving and capturing logic
 - [x] Add checkmates
+- [ ] Refactor code. Make it cleaner.
 - [ ] Add king castle
+- [ ] Add pawn promotion
+- [ ] Implement move history
+- [ ] Detect and handle stalemates
+- [ ] Detect and handle draws (threefold repetition, fifty-move rule)
+- [ ] Add save and load game functionality
+- [ ] Add timer with time controls
+- [ ] Ensure responsive design
+- [ ] Optimize performance
+- [ ] Write unit tests
+- [ ] Improve UI/UX
